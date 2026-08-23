@@ -1,10 +1,11 @@
 .landing-container {
   position: relative;
-  height: 100vh;
+  min-height: calc(100vh - 70px);
   background-image: url("/images/landing-bg.jpg.png"); /* Put your image inside public/images */
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #0f0d0a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,21 +23,29 @@
 .landing-content {
   position: relative;
   z-index: 2;
-  max-width: 700px;
+  max-width: 800px;
   padding: 20px;
+  margin-top: 130px; /* Shifts text cleanly below the top decorative border frame */
 }
 
 .landing-content h1 {
   font-size: 3rem;
   font-family: 'Cinzel', serif;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   margin-bottom: 15px;
+  color: #f5cf68; /* Fallback golden color */
+  background: linear-gradient(135deg, #fff2b2 0%, #e0b438 50%, #9e7515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0px 3px 8px rgba(0,0,0,0.9));
   animation: fadeInDown 1.2s ease;
 }
 
 .landing-content p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin-bottom: 25px;
+  color: #f3e5be;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
   animation: fadeInUp 1.2s ease;
 }
 
@@ -44,9 +53,9 @@
   background-color: #c49b66;
   border: none;
   color: white;
-  padding: 5px 3px;
-  font-size: 1.1rem;
-  border-radius: 15px;
+  padding: 10px 22px;
+  font-size: 1.05rem;
+  border-radius: 12px;
   cursor: pointer;
   transition: 0.3s ease;
 }
@@ -54,6 +63,29 @@
 .btn:hover {
   background-color: #a37f4f;
   transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .landing-content { margin-top: 90px; }
+  .landing-content h1 { font-size: 2.4rem; }
+  .landing-content p { font-size: 1.05rem; }
+  .landing-container { min-height: 80vh; background-size: contain; }
+}
+
+@media (max-width: 768px) {
+  .landing-content { padding: 16px; margin-top: 60px; }
+  .landing-content h1 { font-size: 2rem; }
+  .landing-content p { font-size: 1rem; }
+  .btn { padding: 10px 18px; font-size: 1rem; }
+  .landing-container { min-height: 70vh; background-size: contain; }
+}
+
+@media (max-width: 480px) {
+  .landing-content { margin-top: 40px; }
+  .landing-content h1 { font-size: 1.6rem; }
+  .landing-content p { font-size: 0.95rem; }
+  .landing-container { min-height: 60vh; background-size: cover; background-position: center; }
 }
 
 /* animations */

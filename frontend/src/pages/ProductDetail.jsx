@@ -60,11 +60,11 @@ export default function ProductDetail(){
   return (
     <>
       
-      <div className="container" style={{display:'flex',gap:24}}>
-        <div style={{flex:1}}>
-          <img src={p.image} style={{width:'100%',borderRadius:8}} />
+      <div className="container responsive-two-col">
+        <div className="responsive-col-main" style={{ minWidth: 260 }}>
+          <img src={p.image} style={{ width: '100%', maxHeight: 450, objectFit: 'cover', borderRadius: 8 }} />
         </div>
-        <div style={{flex:1}}>
+        <div className="responsive-col-main" style={{ minWidth: 280 }}>
           <h2>{p.name}</h2>
           <p className="small">{p.description}</p>
           <p><b>₹{p.price}</b></p>

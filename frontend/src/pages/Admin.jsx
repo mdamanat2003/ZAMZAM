@@ -47,7 +47,7 @@ export default function Admin() {
         <section>
           <h3>Orders</h3>
           {orders.length === 0 ? <p>No orders</p> : orders.map(o=>(
-            <div key={o._id} className="card">
+            <div key={o._id} className="card" style={{ marginBottom: 16 }}>
               <div><strong>Order:</strong> {o._id}</div>
               <div><strong>User:</strong> {o.user?.name} ({o.user?.email})</div>
               <div><strong>Items:</strong> {o.items.map(i=>i.name + ' x' + i.qty).join(', ')}</div>

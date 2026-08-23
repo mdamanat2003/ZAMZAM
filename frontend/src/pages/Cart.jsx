@@ -88,19 +88,19 @@ export default function Cart() {
       {cart.length === 0 ? <p>Cart is empty. <Link to="/home">Go shopping</Link></p> : (
         <>
           {cart.map((it, idx) => (
-            <div key={it.product} className="card" style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 8 }}>
-              <img src={it.image} style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 6 }} />
-              <div style={{ flex: 1 }}>
-                <h4>{it.name}</h4>
-                <p className="small">₹{it.price} x {it.qty}</p>
+            <div key={it.product} className="card" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', marginBottom: 12 }}>
+              <img src={it.image} style={{ width: 90, height: 75, objectFit: 'cover', borderRadius: 6 }} />
+              <div style={{ flex: '1 1 180px', minWidth: 0 }}>
+                <h4 style={{ margin: '0 0 4px' }}>{it.name}</h4>
+                <p className="small" style={{ margin: 0 }}>₹{it.price} x {it.qty}</p>
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: 'fit-content' }}>
                 <div style={{ display: 'flex', gap: 6 }}>
-                  <button className="btn" onClick={() => changeQty(idx, -1)}>-</button>
-                  <button className="btn" onClick={() => changeQty(idx, 1)}>+</button>
+                  <button className="btn" style={{ padding: '6px 12px' }} onClick={() => changeQty(idx, -1)}>-</button>
+                  <button className="btn" style={{ padding: '6px 12px' }} onClick={() => changeQty(idx, 1)}>+</button>
                 </div>
-                <button style={{ background: '#c00' }} className="btn" onClick={() => removeItem(idx)}>Remove</button>
+                <button style={{ background: '#c00', padding: '6px 12px' }} className="btn" onClick={() => removeItem(idx)}>Remove</button>
               </div>
              
             </div>

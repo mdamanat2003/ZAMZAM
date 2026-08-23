@@ -35,7 +35,7 @@ export default function About() {
           </p>
 
           <img
-            src="/images/https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_fhwbnnfhwbnnfhwb_unvamv.png" // replace with your image path
+            src="https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_fhwbnnfhwbnnfhwb_unvamv.png"
             alt="Asrar Perfume Collection"
             style={{
               width: "100%",

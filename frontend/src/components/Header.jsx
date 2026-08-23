@@ -25,7 +25,7 @@ export default function Header({ onSearch }) {
     <div className="header">
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div className="menu-btn" onClick={() => setOpen(!open)}>☰</div>
-        <Link to="/home" className="logo-text">ASRAR PERFUME</Link>
+        <Link to="/home" className="logo-text">Zam-zam General Store</Link>
 
         {open && (
           <div className="menu-dropdown">
@@ -69,7 +69,7 @@ export default function Header({ onSearch }) {
       <form onSubmit={doSearch}>
         <input
           className="search"
-          placeholder="Search perfumes, oud, rose..."
+          placeholder="Search here..."
           value={q}
           onChange={e => setQ(e.target.value)}
         />

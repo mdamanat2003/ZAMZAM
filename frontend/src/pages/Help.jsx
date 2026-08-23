@@ -42,9 +42,9 @@ export default function Help() {
     <>
       <div
         style={{
-          minHeight: "90vh",
+          minHeight: "80vh",
           background: "#f8f9fa",
-          padding: "60px 20px",
+          padding: "20px 12px",
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-start",
@@ -56,8 +56,9 @@ export default function Help() {
             maxWidth: "800px",
             background: "#fff",
             borderRadius: "12px",
-            padding: "30px",
+            padding: "20px 16px",
             boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+            boxSizing: "border-box",
           }}
         >
           <h1 style={{ textAlign: "center", color: "#333", marginBottom: 30 }}>

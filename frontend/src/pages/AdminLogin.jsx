@@ -32,13 +32,13 @@ export default function AdminLogin(){
   return (
     <>
       
-      <div className="container" style={{maxWidth:520}}>
+      <div className="container" style={{ width: '100%', maxWidth: 480 }}>
         <h2>Admin Login</h2>
-        <form onSubmit={submit}>
-          <input className="input" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} />
-          <input className="input" type="password" placeholder="Password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})} />
-          <div style={{display:'flex',gap:8,marginTop:8}}>
-            <button className="btn" type="submit">Login as Admin</button>
+        <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <input className="input" type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required />
+          <input className="input" type="password" placeholder="Password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})} required />
+          <div style={{ marginTop: 4 }}>
+            <button className="btn" type="submit" style={{ width: '100%' }}>Login as Admin</button>
           </div>
         </form>
       </div>

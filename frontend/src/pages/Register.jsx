@@ -33,34 +33,37 @@ export default function Register() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="container" style={{ width: "100%", maxWidth: 480 }}>
       <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <input
+          className="input"
           type="text"
           name="name"
           placeholder="Name"
           value={form.name}
           onChange={handleChange}
           required
-        /><br /><br />
+        />
         <input
+          className="input"
           type="email"
           name="email"
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
           required
-        /><br /><br />
+        />
         <input
+          className="input"
           type="password"
           name="password"
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
           required
-        /><br /><br />
-        <button type="submit">Register</button>
+        />
+        <button className="btn" type="submit" style={{ marginTop: 8 }}>Register</button>
       </form>
     </div>
   );

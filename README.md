@@ -1,6 +1,6 @@
-# ASRAR PERFUME - MERN Demo (Local)
+# Zam-zam General Store - MERN Demo (Local)
 
-This is a simple MERN demo application for selling perfumes (ASRAR PERFUME). It includes:
+This is a simple MERN demo application for a small general store (Zam-zam General Store). It includes:
 
 - Backend (Node.js + Express + MongoDB via Mongoose)
 - Frontend (React + Vite)

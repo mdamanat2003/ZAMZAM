@@ -199,25 +199,25 @@ export default function Checkout() {
   return (
     <div className="container" style={{ maxWidth: 900 }}>
       <h2>Checkout</h2>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+      <div className="responsive-two-col">
         {/* Left Section */}
-        <div style={{ flex: 1, minWidth: 300 }}>
+        <div className="responsive-col-main" style={{ minWidth: 280 }}>
           <h3>Shipping</h3>
-          <p>Choose location on map or fill manually</p>
+          <p className="small">Choose location on map or fill manually</p>
 
           {/* 🗺️ Map */}
           <div
             id="map"
             style={{
               height: 240,
-              marginBottom: 8,
+              marginBottom: 12,
               borderRadius: 8,
               overflow: "hidden",
             }}
           ></div>
 
           {/* Address Fields */}
-          <div className="card">
+          <div className="card" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <input
               className="input"
               placeholder="City"
@@ -261,8 +261,8 @@ export default function Checkout() {
           {/* Payment Section */}
           <h3>Payment</h3>
           <div className="card">
-            <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-              <label>
+            <div style={{ display: "flex", gap: 16, marginBottom: 8, flexWrap: "wrap" }}>
+              <label style={{ cursor: "pointer" }}>
                 <input
                   type="radio"
                   checked={paymentMethod === "COD"}
@@ -270,7 +270,7 @@ export default function Checkout() {
                 />{" "}
                 Cash on Delivery
               </label>
-              <label>
+              <label style={{ cursor: "pointer" }}>
                 <input
                   type="radio"
                   checked={paymentMethod === "Online"}
@@ -281,15 +281,15 @@ export default function Checkout() {
             </div>
           </div>
 
-          <div style={{ marginTop: 12 }}>
-            <button className="btn" onClick={placeOrder}>
+          <div style={{ marginTop: 16 }}>
+            <button className="btn" style={{ width: "100%" }} onClick={placeOrder}>
               Place Order (₹{total})
             </button>
           </div>
         </div>
 
         {/* Right Section */}
-        <div style={{ width: 320 }}>
+        <div className="responsive-col-side">
           <h3>Order Summary</h3>
           <div className="card">
             {cart.map((it) => (

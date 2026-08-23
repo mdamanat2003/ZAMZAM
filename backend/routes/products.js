@@ -26,14 +26,18 @@ router.get('/:id', async (req, res) => {
 router.post('/seed', async (req, res) => {
   try {
     const sample = [
-      { name: ' Oud Elegance', description: 'Rich oud with floral hints', price: 1200, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_fhwbnnfhwbnnfhwb_unvamv.png', countInStock: 20 },
-      { name: ' Rose Velvet', description: 'Soft rose and musk', price: 900, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_eoneafeoneafeone_l1ol8p.png', countInStock: 15 },
-      { name: ' Bloosom Breeze', description: 'Fresh citrus unisex', price: 700, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_wv7lzowv7lzowv7l_vj3vfu.png', countInStock: 30 },
-      { name: ' Citrus Breeze', description: 'Fresh citrus unisex', price: 700, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759242033/Gemini_Generated_Image_gj26cggj26cggj26_hupjbp.png', countInStock: 30 },
-      { name: ' Belly Elegance', description: 'Rich oud with floral hints', price: 1200, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759242596/Gemini_Generated_Image_hidhpehidhpehidh_v3zpro.png', countInStock: 20 },
-      { name: ' Rose Blossom', description: 'Soft rose fragrance for everyday use', price: 850, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759242596/Gemini_Generated_Image_kawufvkawufvkawu_iysq8b.png', countInStock: 25 },
-      { name: ' Amber Nights', description: 'Warm amber scent for evenings', price: 950, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759242597/Gemini_Generated_Image_gfptzigfptzigfpt_vzqtjz.png', countInStock: 15 },
-      { name: ' Vanilla Whisper', description: 'Sweet vanilla fragrance for casual wear', price: 780, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759312131/Gemini_Generated_Image_ml2eptml2eptml2e_rnqxwo.png', countInStock: 40 }
+      // Demo books
+      { name: 'The Little Prince', description: 'A classic tale by Antoine de Saint-Exupéry', price: 250, image: 'https://via.placeholder.com/600x600.png?text=The+Little+Prince', countInStock: 50 },
+      { name: 'The Alchemist', description: 'A fable about following your dream by Paulo Coelho', price: 300, image: 'https://via.placeholder.com/600x600.png?text=The+Alchemist', countInStock: 40 },
+      { name: 'Atomic Habits', description: 'An easy & proven way to build good habits', price: 450, image: 'https://via.placeholder.com/600x600.png?text=Atomic+Habits', countInStock: 35 },
+      { name: 'Rich Dad Poor Dad', description: 'Personal finance classic by Robert Kiyosaki', price: 350, image: 'https://via.placeholder.com/600x600.png?text=Rich+Dad+Poor+Dad', countInStock: 30 },
+      { name: 'The Prophet', description: 'Poetic philosophical book by Kahlil Gibran', price: 200, image: 'https://via.placeholder.com/600x600.png?text=The+Prophet', countInStock: 45 },
+      { name: 'Thinking, Fast and Slow', description: 'A landmark book on human thinking by Daniel Kahneman', price: 499, image: 'https://via.placeholder.com/600x600.png?text=Thinking+Fast+and+Slow', countInStock: 25 },
+
+      // Existing perfume items
+      { name: 'Oud Elegance', description: 'Rich oud with floral hints', price: 1200, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_fhwbnnfhwbnnfhwb_unvamv.png', countInStock: 20 },
+      { name: 'Rose Velvet', description: 'Soft rose and musk', price: 900, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_eoneafeoneafeone_l1ol8p.png', countInStock: 15 },
+      { name: 'Citrus Breeze', description: 'Fresh citrus unisex', price: 700, image: 'https://res.cloudinary.com/defte4omf/image/upload/v1759242033/Gemini_Generated_Image_gj26cggj26cggj26_hupjbp.png', countInStock: 30 }
 
     ];
     await Product.deleteMany({});

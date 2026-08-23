@@ -31,15 +31,15 @@ export default function Login(){
   return (
     <>
       
-      <div className="container" style={{maxWidth:520}}>
+      <div className="container" style={{ width: '100%', maxWidth: 480 }}>
         <h2>{isRegister ? 'Register' : 'Login'}</h2>
-        <form onSubmit={submit}>
-          {isRegister && <input className="input" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} />}
-          <input className="input" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} />
-          <input className="input" type="password" placeholder="Password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})} />
-          <div style={{display:'flex',gap:8,marginTop:8}}>
-            <button className="btn" type="submit">{isRegister ? 'Register' : 'Login'}</button>
-            <button type="button" onClick={()=>setIsRegister(!isRegister)}>{isRegister ? 'Switch to Login' : 'Switch to Register'}</button>
+        <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {isRegister && <input className="input" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required />}
+          <input className="input" type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required />
+          <input className="input" type="password" placeholder="Password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})} required />
+          <div style={{ display: 'flex', gap: 10, marginTop: 4, flexWrap: 'wrap' }}>
+            <button className="btn" type="submit" style={{ flex: 1 }}>{isRegister ? 'Register' : 'Login'}</button>
+            <button className="btn" type="button" style={{ background: '#666', flex: 1 }} onClick={()=>setIsRegister(!isRegister)}>{isRegister ? 'Switch to Login' : 'Switch to Register'}</button>
           </div>
         </form>
         <hr />

@@ -44,14 +44,13 @@ export default function Track() {
   return (
     <>
      
-      <div className="container">
+      <div className="container" style={{ width: '100%', maxWidth: 600 }}>
         <h2>Track Order</h2>
-        <form onSubmit={doTrack}>
-          <input value={id} onChange={e=>setId(e.target.value)} placeholder="Enter Order ID" />
-          <button type="submit" style={{ backgroundColor: '#e6e30aff'}}>
-              Track
-            </button>
-
+        <form onSubmit={doTrack} style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 20 }}>
+          <input className="input" style={{ flex: '1 1 200px' }} value={id} onChange={e=>setId(e.target.value)} placeholder="Enter Order ID" />
+          <button className="btn" type="submit" style={{ padding: '10px 20px' }}>
+            Track
+          </button>
         </form>
 
         {info && (

@@ -63,7 +63,7 @@ export default function Account() {
   return (
     <>
    
-      <div style={{ maxWidth: 500, margin: "30px auto", padding: 20 }}>
+      <div style={{ width: "100%", maxWidth: 500, margin: "20px auto", padding: "0 16px", boxSizing: "border-box" }}>
         <h2 style={{ textAlign: "center", marginBottom: 20 }}>Your Account</h2>
 
         {user ? (
