@@ -111,14 +111,7 @@ select {
   background: #e0e0e0;
 }
 
-.footer {
-  margin-top: 50px;
-  text-align: center;
-  padding: 20px;
-  color: #777;
-  border-top: 1px solid #eee;
-  background-color: #fff;
-}
+
 
 @media (max-width: 900px) {
   .home-container {
