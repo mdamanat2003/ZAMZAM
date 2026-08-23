@@ -189,7 +189,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="footer">© ASRAR PERFUME</div>
+      <div className="footer">© Zam-zam General Store</div>
     </>
   );
 }

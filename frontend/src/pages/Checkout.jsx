@@ -139,7 +139,7 @@ export default function Checkout() {
           key: "rzp_test_xxxxxxxx", // Replace with your actual Razorpay key
           amount: total * 100,
           currency: "INR",
-          name: "Asrar Perfume",
+          name: "Zam-zam General Store",
           description: "Order Payment",
           order_id: orderId,
           handler: async function (response) {

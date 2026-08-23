@@ -41,7 +41,7 @@ function Catalog({ searchQuery }) {
   return (
     <div className="container">
       <h2 className="center" style={{ fontSize: "28px", marginBottom: "20px" }}>
-        Perfume Catalog
+        Product Catalog
       </h2>
 
       <div className="grid">

@@ -17,7 +17,7 @@ export default function About() {
           style={{ maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}
         >
           <h1 style={{ fontSize: "2.2rem", marginBottom: "20px" }}>
-            About <span style={{ color: "#c49b63" }}>Asrar Perfume</span>
+            About <span style={{ color: "#c49b63" }}>Zam-zam General Store</span>
           </h1>
           <p
             style={{
@@ -27,16 +27,15 @@ export default function About() {
               margin: "0 auto 40px",
             }}
           >
-            Welcome to <b>Asrar Perfume</b> – your destination for luxurious,
-            long-lasting, and authentic fragrances. Founded with a passion for
-            perfection, we believe that perfume is not just a scent – it’s a
-            statement of who you are. Our mission is to bring you high-quality,
-            handpicked Arabic and Western fragrances at affordable prices.
+            Welcome to <b>Zam-zam General Store</b> – your destination for books,
+            gifts, and everyday essentials. Founded with a passion for
+            perfection, we believe in bringing you high-quality,
+            handpicked items at affordable prices.
           </p>
 
           <img
             src="https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_fhwbnnfhwbnnfhwb_unvamv.png"
-            alt="Asrar Perfume Collection"
+            alt="Zam-zam General Store Collection"
             style={{
               width: "100%",
               maxHeight: "400px",
@@ -57,11 +56,10 @@ export default function About() {
               color: "#444",
             }}
           >
-            Started in 2025, Asrar Perfume was born from a love of traditional
-            Arabian perfumery and modern fragrance artistry. Each perfume we
-            craft or source goes through careful testing to ensure long-lasting
-            aroma, purity, and elegance. We are proud to serve thousands of
-            happy customers across India and beyond.
+            Started in 2025, Zam-zam General Store was born to provide easy access
+            to daily essentials and curated goods. Each product we offer is carefully selected
+            to ensure quality and value. We are proud to serve thousands of
+            happy customers.
           </p>
 
           <h2 style={{ fontSize: "1.5rem", marginBottom: "10px" }}>
@@ -75,10 +73,9 @@ export default function About() {
               marginBottom: "30px",
             }}
           >
-            We promise 100% authentic and premium-quality perfumes, fast
-            delivery, and a fragrance experience you’ll fall in love with. Our
-            dedicated team ensures every bottle you receive carries the essence
-            of excellence.
+            We promise 100% authentic and premium-quality items, fast
+            delivery, and an exceptional customer experience. Our
+            dedicated team ensures every order is handled with care.
           </p>
 
           <h2 style={{ fontSize: "1.5rem", marginBottom: "10px" }}>
@@ -87,11 +84,11 @@ export default function About() {
           <p style={{ fontSize: "1rem", color: "#555" }}>
             Have questions or feedback? We’d love to hear from you!
             <br />
-            <b>Email:</b> support@asrarperfume.com
+            <b>Email:</b> support@zamzamgeneralstore.com
             <br />
             <b>Phone:</b> +91 xxxxx xxxxx
             <br />
-            <b>Address:</b> Asrar Perfume Pvt. Ltd., Kolkata, India
+            <b>Address:</b> Zam-zam General Store Pvt. Ltd., Kolkata, India
           </p>
         </div>
       </div>
