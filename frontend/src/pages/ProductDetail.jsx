@@ -1,26 +1,39 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import { API_BASE } from '../api'
+import { demoProducts } from '../data/demoProducts'
 
 export default function ProductDetail(){
   const { id } = useParams()
+  const navigate = useNavigate()
   const [p, setP] = useState(null)
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
 
   useEffect(()=>{
     fetch(API_BASE + '/api/products/' + id)
-      .then(r=>r.json())
-      .then(setP)
-      .catch(err=>console.error(err))
+      .then(r => {
+        if (!r.ok) throw new Error("Product fetch failed");
+        return r.json();
+      })
+      .then(data => {
+        if (data && data._id) setP(data);
+        else {
+          const demo = demoProducts.find(item => item._id === id);
+          if (demo) setP(demo);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        const demo = demoProducts.find(item => item._id === id);
+        if (demo) setP(demo);
+      })
   }, [id])
-
-
 
   async function addToCart(){
     const token = localStorage.getItem('token')
-    if(!token){ alert('Please login to add items to cart'); return }
+    if(!token){ navigate('/login'); return }
     try {
       const res = await fetch(API_BASE + '/api/cart', {
         method: 'POST',
@@ -39,9 +52,30 @@ export default function ProductDetail(){
     }
   }
 
+  async function buyNow(){
+    const token = localStorage.getItem('token')
+    if(!token){ navigate('/login'); return }
+    try {
+      const res = await fetch(API_BASE + '/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ productId: p._id })
+      })
+      if(res.ok){
+        navigate('/checkout')
+      } else {
+        const data = await res.json()
+        alert(data.message || 'Failed to proceed to buy')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Network error')
+    }
+  }
+
   async function addToWishlist(){
     const token = localStorage.getItem('token')
-    if(!token){ alert('Login first'); return; }
+    if(!token){ navigate('/login'); return; }
     await fetch(API_BASE + '/api/wishlist/'+id, { method:'POST', headers:{ Authorization:'Bearer '+token } })
     alert('Added to wishlist')
   }
@@ -49,7 +83,7 @@ export default function ProductDetail(){
   async function submitReview(e){
     e.preventDefault()
     const token = localStorage.getItem('token')
-    if(!token){ alert('Login first'); return; }
+    if(!token){ navigate('/login'); return; }
     const res = await fetch(API_BASE + '/api/reviews/' + id, { method:'POST', headers:{ 'Content-Type':'application/json', Authorization:'Bearer '+token }, body: JSON.stringify({ rating, comment }) })
     if(res.ok){ alert('Review added'); const updated = await fetch(API_BASE + '/api/products/' + id).then(r=>r.json()); setP(updated) }
     else { const data = await res.json(); alert(data.message || 'Error') }
@@ -70,8 +104,9 @@ export default function ProductDetail(){
           <p><b>₹{p.price}</b></p>
           <p>Rating: {p.rating ? p.rating.toFixed(1) : '—'} ({p.reviews.length} reviews)</p>
           <p>In stock: {p.countInStock}</p>
-          <div style={{display:'flex',gap:8,marginTop:8}}>
-            <button className="btn" onClick={addToCart}>Add to cart</button>
+          <div style={{display:'flex',gap:8,marginTop:8,flexWrap:'wrap'}}>
+            <button className="btn" onClick={buyNow}>Buy Now</button>
+            <button className="btn" onClick={addToCart} style={{background:'#444'}}>Add to cart</button>
             <button className="btn" onClick={addToWishlist} style={{background:'#8b6b1c'}}>Add to wishlist</button>
           </div>
 

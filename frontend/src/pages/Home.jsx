@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import { API_BASE } from "../api";
+import { demoProducts } from "../data/demoProducts";
 import "./Home.css"; // ✅ import the CSS file
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
+export default function Home({ searchQuery }) {
+  const [products, setProducts] = useState(demoProducts);
   const [searchParams] = useSearchParams();
-  const q = searchParams.get("q") || "";
+  const navigate = useNavigate();
+  const q = searchQuery || searchParams.get("q") || "";
 
   const [filters, setFilters] = useState({
     smell: "",
@@ -20,27 +22,98 @@ export default function Home() {
   useEffect(() => {
     fetch(API_BASE + "/api/products" + (q ? "?q=" + encodeURIComponent(q) : ""))
       .then((r) => r.json())
-      .then(setProducts)
-      .catch((err) => console.error(err));
-  }, [q, filters]);
-
-  function addToCart(p) {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existing = cart.find((i) => i.product === p._id);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({
-        product: p._id,
-        name: p.name,
-        price: p.price,
-        qty: 1,
-        image: p.image,
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProducts(data);
+        } else {
+          setProducts(demoProducts);
+        }
+      })
+      .catch((err) => {
+        console.error("API error, using demo products:", err);
+        setProducts(demoProducts);
       });
+  }, [q]);
+
+  async function addToCart(p) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart");
+    try {
+      const res = await fetch(API_BASE + "/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({ productId: p._id }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("Added to cart!");
+      } else {
+        alert(data.message || "Failed to add to cart");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error");
+    }
   }
+
+  async function handleBuyNow(p) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    try {
+      const res = await fetch(API_BASE + "/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({ productId: p._id }),
+      });
+      if (res.ok) {
+        navigate("/checkout");
+      } else {
+        const data = await res.json();
+        alert(data.message || "Failed to proceed to buy");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error");
+    }
+  }
+
+  const filteredProducts = products.filter((p) => {
+    if (q && !p.name.toLowerCase().includes(q.toLowerCase()) && !(p.description && p.description.toLowerCase().includes(q.toLowerCase()))) {
+      return false;
+    }
+    if (filters.smell && p.smell && p.smell.toLowerCase() !== filters.smell.toLowerCase()) {
+      return false;
+    }
+    if (filters.price) {
+      const price = Number(p.price);
+      if (filters.price === "0-500" && !(price <= 500)) return false;
+      if (filters.price === "500-1000" && !(price >= 500 && price <= 1000)) return false;
+      if (filters.price === "1000-2000" && !(price >= 1000 && price <= 2000)) return false;
+      if (filters.price === "2000+" && !(price >= 2000)) return false;
+    }
+    if (filters.age && p.age && p.age.toLowerCase() !== filters.age.toLowerCase()) {
+      return false;
+    }
+    if (filters.size && p.size && String(p.size) !== String(filters.size)) {
+      return false;
+    }
+    if (filters.newLaunch && !p.newLaunch) {
+      return false;
+    }
+    return true;
+  });
 
   return (
     <>
@@ -63,7 +136,7 @@ export default function Home() {
 
           <h2>Featured Perfumes</h2>
           <div className="grid">
-            {products.map((p) => (
+            {filteredProducts.map((p) => (
               <div className="card" key={p._id}>
                 <img src={p.image} alt={p.name} />
                 <h3>{p.name}</h3>
@@ -71,8 +144,11 @@ export default function Home() {
                 <p>
                   <b>₹{p.price}</b>
                 </p>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button className="btn" onClick={() => addToCart(p)}>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <button className="btn" onClick={() => handleBuyNow(p)}>
+                    Buy Now
+                  </button>
+                  <button className="btn" style={{ background: "#444" }} onClick={() => addToCart(p)}>
                     Add to cart
                   </button>
                   <Link to={"/product/" + p._id}>

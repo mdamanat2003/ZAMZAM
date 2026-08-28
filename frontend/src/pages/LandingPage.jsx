@@ -10,7 +10,9 @@ export default function LandingPage() {
         <h1>Welcome to ZAM-ZAM GENERAL STORE</h1>
         <p>Books, gifts and everyday essentials — curated for you</p>
         <Link to="/home">
-          <button className="btn">Enter Store</button>
+          <button className="btn" style={{ padding: "14px 28px", fontSize: "16px" }}>
+            Enter Store & Browse Demo Products
+          </button>
         </Link>
       </div>
     </div>
