@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import Header from "../components/Header";
 import { API_BASE } from "../api";
 import { demoProducts } from "../data/demoProducts";
 import "./Home.css"; // ✅ import the CSS file
@@ -37,7 +36,9 @@ export default function Home({ searchQuery }) {
 
   async function addToCart(p) {
     const token = localStorage.getItem("token");
-    if (!token) {
+    if (!token || token === "null" || token === "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       navigate("/login");
       return;
     }
@@ -53,6 +54,11 @@ export default function Home({ searchQuery }) {
       const data = await res.json();
       if (res.ok) {
         alert("Added to cart!");
+      } else if (res.status === 401 || data.message === "Token invalid" || data.message === "No token") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        alert("Session expired. Please log in to add items to cart.");
+        navigate("/login");
       } else {
         alert(data.message || "Failed to add to cart");
       }
@@ -62,31 +68,9 @@ export default function Home({ searchQuery }) {
     }
   }
 
-  async function handleBuyNow(p) {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-    try {
-      const res = await fetch(API_BASE + "/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify({ productId: p._id }),
-      });
-      if (res.ok) {
-        navigate("/checkout");
-      } else {
-        const data = await res.json();
-        alert(data.message || "Failed to proceed to buy");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Network error");
-    }
+  function handleBuyNow(p) {
+    // Clicking Buy automatically opens the product detail view with extra info & reviews down below
+    navigate("/product/" + p._id);
   }
 
   const filteredProducts = products.filter((p) => {
@@ -117,8 +101,6 @@ export default function Home({ searchQuery }) {
 
   return (
     <>
-      <Header />
-
       <div className="home-container">
         {/* Left: Products */}
         <div className="home-main">
@@ -138,8 +120,10 @@ export default function Home({ searchQuery }) {
           <div className="grid">
             {filteredProducts.map((p) => (
               <div className="card" key={p._id}>
-                <img src={p.image} alt={p.name} />
-                <h3>{p.name}</h3>
+                <Link to={"/product/" + p._id} style={{ textDecoration: "none", color: "inherit" }}>
+                  <img src={p.image} alt={p.name} style={{ cursor: "pointer" }} />
+                  <h3>{p.name}</h3>
+                </Link>
                 <p className="small">{p.description}</p>
                 <p>
                   <b>₹{p.price}</b>
@@ -151,11 +135,6 @@ export default function Home({ searchQuery }) {
                   <button className="btn" style={{ background: "#444" }} onClick={() => addToCart(p)}>
                     Add to cart
                   </button>
-                  <Link to={"/product/" + p._id}>
-                    <button className="btn" style={{ background: "#a67c2a" }}>
-                      View
-                    </button>
-                  </Link>
                 </div>
               </div>
             ))}
@@ -264,8 +243,6 @@ export default function Home({ searchQuery }) {
           </button>
         </div>
       </div>
-
-      <div className="footer">© Zam-zam General Store</div>
     </>
   );
 }

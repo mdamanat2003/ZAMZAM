@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from '../components/Header'
 import { API_BASE } from '../api'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,10 +14,16 @@ export default function Login(){
       const res = await fetch(url, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(form) })
       const data = await res.json()
       if(res.ok){
-        // save token and user
-        localStorage.setItem('token', data.token)
-        localStorage.setItem('user', JSON.stringify(data.user))
-        navigate('/') // go to home
+        if (isRegister) {
+          alert('Registration successful! Please log in with your account.')
+          setIsRegister(false)
+          setForm({ name: '', email: form.email, password: '' })
+        } else {
+          // save token and user
+          localStorage.setItem('token', data.token)
+          localStorage.setItem('user', JSON.stringify(data.user))
+          navigate('/') // go to home
+        }
       } else {
         alert(data.message || 'Login/Register failed')
       }

@@ -189,10 +189,11 @@ export default function Checkout() {
     const data = await res.json();
     if (res.ok) {
       localStorage.removeItem("cart");
-      alert("Order placed successfully: " + (data.orderId || ""));
-      navigate("/home");
+      const orderId = data.orderId || data._id || "";
+      alert(`Order placed successfully! Order ID: #${orderId}`);
+      navigate(`/track?id=${orderId}`);
     } else {
-      alert(data.message || "Order failed");
+      alert(data.message || "Order placement failed");
     }
   }
 

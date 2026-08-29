@@ -20,9 +20,8 @@ export default function Register() {
       });
       const data = await res.json();
       if (res.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
-        navigate("/home");
+        alert("Registration successful! Please log in.");
+        navigate("/login");
       } else {
         alert(data.message);
       }

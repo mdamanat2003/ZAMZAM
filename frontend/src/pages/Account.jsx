@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
 import { API_BASE } from "../api";
 
 export default function Account() {

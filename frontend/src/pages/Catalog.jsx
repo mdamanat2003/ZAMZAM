@@ -30,7 +30,9 @@ function Catalog({ searchQuery = "" }) {
 
   const addToCart = async (id) => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    if (!token || token === "null" || token === "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       navigate("/login");
       return;
     }
@@ -46,30 +48,20 @@ function Catalog({ searchQuery = "" }) {
       alert("Added to cart!");
     } catch (err) {
       console.error(err);
-      alert("Failed to add to cart.");
+      if (err.response && (err.response.status === 401 || err.response.data?.message === "Token invalid")) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        alert("Session expired. Please log in to add items to cart.");
+        navigate("/login");
+      } else {
+        alert("Failed to add to cart.");
+      }
     }
   };
 
-  const buyNow = async (id) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-    try {
-      await axios.post(
-        `${API_BASE}/api/cart`,
-        { productId: id },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          withCredentials: true,
-        }
-      );
-      navigate("/checkout");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to proceed to buy.");
-    }
+  const buyNow = (id) => {
+    // Clicking Buy automatically opens product view page with extra info & reviews down below
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -81,11 +73,12 @@ function Catalog({ searchQuery = "" }) {
       <div className="grid">
         {filteredProducts.map((product) => (
           <div key={product._id} className="card">
-            <img src={product.image} alt={product.name} />
-
-            <h3 style={{ fontSize: "20px", marginTop: "10px" }}>
-              {product.name}
-            </h3>
+            <Link to={`/product/${product._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <img src={product.image} alt={product.name} style={{ cursor: "pointer" }} />
+              <h3 style={{ fontSize: "20px", marginTop: "10px" }}>
+                {product.name}
+              </h3>
+            </Link>
             <p className="small">
               {product.description ? product.description.slice(0, 50) : ""}...
             </p>
@@ -100,9 +93,6 @@ function Catalog({ searchQuery = "" }) {
               <button onClick={() => addToCart(product._id)} className="btn" style={{ background: "#444" }}>
                 Add to Cart
               </button>
-              <Link to={`/product/${product._id}`} style={{ textDecoration: "none" }}>
-                <button className="btn" style={{ background: "#a67c2a" }}>View Details</button>
-              </Link>
             </div>
           </div>
         ))}
