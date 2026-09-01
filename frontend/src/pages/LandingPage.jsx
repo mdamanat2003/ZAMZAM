@@ -7,7 +7,7 @@ export default function LandingPage() {
     <div className="landing-container">
       <div className="overlay"></div>
       <div className="landing-content">
-        <h1>Welcome to ZAM-ZAM GENERAL STORE</h1>
+        <h1>Welcome to E-COMMERCE</h1>
         <p>Books, gifts and everyday essentials — curated for you</p>
         <Link to="/home">
           <button className="btn" style={{ padding: "14px 28px", fontSize: "16px" }}>

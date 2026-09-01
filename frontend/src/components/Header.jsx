@@ -27,7 +27,7 @@ export default function Header({ onSearch }) {
     <div className="header">
       <div className="header-brand">
         <div className="menu-btn" onClick={() => setOpen(!open)}>☰</div>
-        <Link to="/home" className="logo-text">Zam-zam General Store</Link>
+        <Link to="/home" className="logo-text">E-commerce</Link>
 
         {open && (
           <div className="menu-dropdown">

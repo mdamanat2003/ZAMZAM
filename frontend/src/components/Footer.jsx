@@ -10,12 +10,12 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h4>Zam-zam General Store</h4>
+          <h4>E-commerce</h4>
           <p>Books, gifts and everyday essentials — curated for you.</p>
           <p>
             Email:{" "}
-            <a href="mailto:support@zamzamgeneralstore.com">
-              support@zamzamgeneralstore.com
+            <a href="mailto:support@ecommerce.com">
+              support@ecommerce.com
             </a>
           </p>
         </div>
@@ -53,7 +53,7 @@ const Footer = () => {
         </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Zam-zam General Store. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} E-commerce. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -17,7 +17,7 @@ export default function About() {
           style={{ maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}
         >
           <h1 style={{ fontSize: "2.2rem", marginBottom: "20px" }}>
-            About <span style={{ color: "#c49b63" }}>Zam-zam General Store</span>
+            About <span style={{ color: "#c49b63" }}>E-commerce</span>
           </h1>
           <p
             style={{
@@ -27,7 +27,7 @@ export default function About() {
               margin: "0 auto 40px",
             }}
           >
-            Welcome to <b>Zam-zam General Store</b> – your destination for books,
+            Welcome to <b>E-commerce</b> – your destination for books,
             gifts, and everyday essentials. Founded with a passion for
             perfection, we believe in bringing you high-quality,
             handpicked items at affordable prices.
@@ -35,7 +35,7 @@ export default function About() {
 
           <img
             src="https://res.cloudinary.com/defte4omf/image/upload/v1759056266/Gemini_Generated_Image_fhwbnnfhwbnnfhwb_unvamv.png"
-            alt="Zam-zam General Store Collection"
+            alt="E-commerce Collection"
             style={{
               width: "100%",
               maxHeight: "400px",
@@ -56,7 +56,7 @@ export default function About() {
               color: "#444",
             }}
           >
-            Started in 2025, Zam-zam General Store was born to provide easy access
+            Started in 2025, E-commerce was born to provide easy access
             to daily essentials and curated goods. Each product we offer is carefully selected
             to ensure quality and value. We are proud to serve thousands of
             happy customers.
@@ -84,11 +84,11 @@ export default function About() {
           <p style={{ fontSize: "1rem", color: "#555" }}>
             Have questions or feedback? We’d love to hear from you!
             <br />
-            <b>Email:</b> support@zamzamgeneralstore.com
+            <b>Email:</b> support@ecommerce.com
             <br />
             <b>Phone:</b> +91 xxxxx xxxxx
             <br />
-            <b>Address:</b> Zam-zam General Store Pvt. Ltd., Kolkata, India
+            <b>Address:</b> E-commerce Pvt. Ltd., Kolkata, India
           </p>
         </div>
       </div>
